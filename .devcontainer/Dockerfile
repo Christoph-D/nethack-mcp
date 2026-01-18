@@ -15,6 +15,7 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNA
   && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
 
 ENV PATH="$PATH:/usr/local/go/bin:/home/$USERNAME/go/bin/"
+RUN go install github.com/Christoph-D/pebbles/cmd/peb@latest
 
 ENV OPENCODE_CONFIG=/home/$USERNAME/persistent-config/opencode.json
 RUN curl -fsSL https://opencode.ai/install | bash
