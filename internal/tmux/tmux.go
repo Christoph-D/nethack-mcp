@@ -39,6 +39,17 @@ func CapturePane(target string) (string, error) {
 
 func SendKeys(target string, keys []string) error {
 	args := []string{"send-keys", "-t", target}
+
+	// Translate literal characters for tmux compatibility
+	for i, key := range keys {
+		if key == " " {
+			keys[i] = "Space"
+		}
+		if key == "\n" {
+			keys[i] = "Enter"
+		}
+	}
+
 	args = append(args, keys...)
 
 	cmd := exec.Command("tmux", args...)
