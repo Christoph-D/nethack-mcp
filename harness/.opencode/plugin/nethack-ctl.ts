@@ -18,9 +18,9 @@ export const NethackPlugin: Plugin = async () => {
         },
       }),
       nethack_send: tool({
-        description: "Send keystrokes to NetHack and get the new screen",
+        description: "Send tmux keystrokes to NetHack and get the new screen",
         args: {
-          keys: tool.schema.array(tool.schema.string()).describe("Array of tmux keystrokes to send (e.g., ['h', 'y', 'Escape'])"),
+          keys: tool.schema.array(tool.schema.string()).describe("Array of tmux keystrokes to send (e.g., ['h', 'y', 'Escape']). You must use tmux key names, e.g. Space, Escape."),
         },
         async execute(args) {
           const proc = spawn(['nethack-ctl', 'send', '--keys=' + args.keys.join('|')], {
