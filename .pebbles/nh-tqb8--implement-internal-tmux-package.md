@@ -2,9 +2,9 @@
 id: nh-tqb8
 title: Implement internal/tmux package
 type: task
-status: new
+status: fixed
 created: "2026-01-18T15:48:46+01:00"
-changed: "2026-01-18T15:50:25+01:00"
+changed: "2026-01-18T16:00:34+01:00"
 blocked-by:
     - nh-juqz
 ---

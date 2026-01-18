@@ -2,9 +2,9 @@
 id: nh-ulka
 title: Implement CLI entry point and subcommands
 type: task
-status: new
+status: fixed
 created: "2026-01-18T15:48:51+01:00"
-changed: "2026-01-18T15:50:25+01:00"
+changed: "2026-01-18T16:01:49+01:00"
 blocked-by:
     - nh-tqb8
 ---

@@ -2,9 +2,9 @@
 id: nh-juqz
 title: Initialize Go module and project structure
 type: task
-status: new
+status: fixed
 created: "2026-01-18T15:48:42+01:00"
-changed: "2026-01-18T15:50:24+01:00"
+changed: "2026-01-18T16:00:00+01:00"
 ---
 # Initialize Go module and project structure
 

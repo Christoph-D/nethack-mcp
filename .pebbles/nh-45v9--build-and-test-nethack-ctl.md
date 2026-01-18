@@ -2,9 +2,9 @@
 id: nh-45v9
 title: Build and test nethack-ctl
 type: task
-status: new
+status: fixed
 created: "2026-01-18T15:48:56+01:00"
-changed: "2026-01-18T15:50:26+01:00"
+changed: "2026-01-18T16:03:43+01:00"
 blocked-by:
     - nh-ulka
 ---

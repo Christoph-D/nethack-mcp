@@ -2,9 +2,9 @@
 id: nh-08bn
 title: Implement nethack-ctl CLI tool
 type: epic
-status: new
+status: fixed
 created: "2026-01-18T15:48:37+01:00"
-changed: "2026-01-18T15:50:26+01:00"
+changed: "2026-01-18T16:03:43+01:00"
 blocked-by:
     - nh-45v9
 ---
