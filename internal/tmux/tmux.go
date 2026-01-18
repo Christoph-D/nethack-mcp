@@ -23,7 +23,18 @@ func CapturePane(target string) (string, error) {
 		return "", fmt.Errorf("tmux capture-pane failed: %w", err)
 	}
 
-	return stdout.String(), nil
+	screen := stdout.String()
+	var screenWithSpaces strings.Builder
+
+	// Insert a space between each character for better tokenization
+	for i, char := range screen {
+		if i > 0 {
+			screenWithSpaces.WriteString(" ")
+		}
+		screenWithSpaces.WriteRune(char)
+	}
+
+	return screenWithSpaces.String(), nil
 }
 
 func SendKeys(target string, keys []string) error {
