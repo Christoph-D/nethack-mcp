@@ -9,6 +9,11 @@ Reach dungeon level 5 alive.
 Use the nethack MCP tools to play:
 - `nethack_screen`: View the current game screen (call this frequently to see game state)
 - `nethack_send`: Send keystrokes to the game (pass array of keys like `['h', 'y', 'e']`)
+- Row/column numbers:
+  - South/down = larger row numbers
+  - North/up = smaller row numbers
+  - West/left = larger column numbers
+  - East/right = smaller column numbers
 
 ## Basic Controls
 - Space - Continue in-game messages (must press to progress through messages)

@@ -23,18 +23,27 @@ func CapturePane(target string) (string, error) {
 		return "", fmt.Errorf("tmux capture-pane failed: %w", err)
 	}
 
-	screen := stdout.String()
-	var screenWithSpaces strings.Builder
+	rawScreen := stdout.String()
+	var screen strings.Builder
 
-	// Insert a space between each character for better tokenization
-	for i, char := range screen {
-		if i > 0 {
-			screenWithSpaces.WriteString(" ")
+	// Make the screen easier to parse for an LLM
+	var row, col int
+	for _, char := range rawScreen {
+		if col == 0 {
+			fmt.Fprintf(&screen, "Row %02d ", row)
 		}
-		screenWithSpaces.WriteRune(char)
+		if col%10 == 0 {
+			fmt.Fprintf(&screen, " ╋%02d╋ ", col)
+		}
+		screen.WriteRune(char)
+		col++
+		if char == '\n' {
+			col = 0
+			row++
+		}
 	}
 
-	return screenWithSpaces.String(), nil
+	return screen.String(), nil
 }
 
 func SendKeys(target string, keys []string) error {
