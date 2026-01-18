@@ -11,10 +11,16 @@ export const NethackPlugin: Plugin = async () => {
         async execute() {
           const proc = spawn(['nethack-ctl', 'screen'], {
             stdout: 'pipe',
+            stderr: 'pipe',
           });
-          const result = await new Response(proc.stdout).text();
+          const [stdout, stderr] = await Promise.all([
+            new Response(proc.stdout).text(),
+            new Response(proc.stderr).text(),
+          ]);
           await proc.exited;
-          return result.trim();
+          const stderrText = stderr.trim();
+          const result = stdout.trim();
+          return stderrText ? `${result}\n\nError: ${stderrText}` : result;
         },
       }),
       nethack_send: tool({
@@ -25,10 +31,16 @@ export const NethackPlugin: Plugin = async () => {
         async execute(args) {
           const proc = spawn(['nethack-ctl', 'send', '--keys=' + args.keys.join('|')], {
             stdout: 'pipe',
+            stderr: 'pipe',
           });
-          const result = await new Response(proc.stdout).text();
+          const [stdout, stderr] = await Promise.all([
+            new Response(proc.stdout).text(),
+            new Response(proc.stderr).text(),
+          ]);
           await proc.exited;
-          return result.trim();
+          const stderrText = stderr.trim();
+          const result = stdout.trim();
+          return stderrText ? `${result}\n\nError: ${stderrText}` : result;
         },
       }),
     },

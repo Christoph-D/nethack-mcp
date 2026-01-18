@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func CapturePane(target string) (string, error) {
+func CapturePane(target string) (*Output, error) {
 	args := []string{"capture-pane", "-p", "-t", target}
 	cmd := exec.Command("tmux", args...)
 
@@ -18,35 +18,16 @@ func CapturePane(target string) (string, error) {
 	err := cmd.Run()
 	if err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok {
-			return "", fmt.Errorf("tmux capture-pane failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+			return nil, fmt.Errorf("tmux capture-pane failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
 		}
-		return "", fmt.Errorf("tmux capture-pane failed: %w", err)
+		return nil, fmt.Errorf("tmux capture-pane failed: %w", err)
 	}
 
-	rawScreen := stdout.String()
-	var screen strings.Builder
-
-	// Make the screen easier to parse for an LLM
-	var row, col int
-	for _, char := range rawScreen {
-		if col == 0 {
-			fmt.Fprintf(&screen, "Row %02d ", row)
-		}
-		if col%10 == 0 {
-			fmt.Fprintf(&screen, " ╋%02d╋ ", col)
-		}
-		screen.WriteRune(char)
-		col++
-		if char == '\n' {
-			col = 0
-			row++
-		}
-	}
-
-	return screen.String(), nil
+	output := Parse(stdout.String())
+	return &output, nil
 }
 
-func SendKeys(target string, keys []string) error {
+func SendKeys(target string, keys []string) (*Output, error) {
 	args := []string{"send-keys", "-t", target}
 
 	// Translate literal characters for tmux compatibility
@@ -66,18 +47,11 @@ func SendKeys(target string, keys []string) error {
 	err := cmd.Run()
 	if err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok {
-			return fmt.Errorf("tmux send-keys failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+			return nil, fmt.Errorf("tmux send-keys failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
 		}
-		return fmt.Errorf("tmux send-keys failed: %w", err)
+		return nil, fmt.Errorf("tmux send-keys failed: %w", err)
 	}
 
 	time.Sleep(500 * time.Millisecond)
-	pane, err := CapturePane(target)
-	if err != nil {
-		return fmt.Errorf("failed to capture pane after sending keys: %w")
-	}
-
-	fmt.Printf("Screen after sending keys:\n%s", pane)
-
-	return nil
+	return CapturePane(target)
 }
