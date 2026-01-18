@@ -16,6 +16,7 @@ Use the nethack MCP tools to play:
 - . - Rest a turn
 - < - Go up a staircase
 - > - Go down a staircase (your primary way to reach deeper levels)
+- #kick - Kick a door (Send ["#", "k", "i", "c", "k", "Enter", direction_key])
 - Escape - Cancel current action
 - ? - Show help menu (learn about more actions)
 
@@ -59,6 +60,8 @@ Frequently read pebs pl-2j11 and pl-o3wf and its dependencies to understand your
 
 - **pl-2j11 (Short-term goals)**: Attach immediate goals and tasks here (e.g., "Find a weapon", "Descend to level 2", "Explore the current room")
 - **pl-o3wf (Long-term goals)**: Attach major strategic goals here (e.g., "Reach dungeon level 5", "Build up survival skills")
+
+Whenever a run ends, close all short-term goal as wontfix and consider which long-term goals to keep and which to close.
 
 **Critical**:
 - Always create new task pebs for your short-term goals and attach them to pl-2j11 via `blocked-by`
