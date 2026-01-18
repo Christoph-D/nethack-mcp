@@ -74,4 +74,8 @@ Whenever a run ends, close all short-term goal as wontfix and consider which lon
 - Keep pl-2j11 and pl-o3wf open at all times; never mark them as `fixed`
 - Use peb status updates to track your progress (new → in-progress → fixed)
 
+## Tool Creation
+
+You should proactively write and call your own tools whenever needed, for example for path finding. All tools must be written in Go. Give each tool a clear name and description, including an example how and when to call it.
+
 Remember: The game is about careful exploration and learning from mistakes. Take your time, read the screen carefully, and document your discoveries. Start with the basics such as figuring out the movement and document what you learn.
