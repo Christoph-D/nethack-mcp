@@ -28,6 +28,10 @@ func CapturePane(target string) (*Output, error) {
 }
 
 func SendKeys(target string, keys []string) (*Output, error) {
+	if len(keys) > 1 {
+		return nil, fmt.Errorf("Please send one key at a time")
+	}
+
 	args := []string{"send-keys", "-t", target}
 
 	// Translate literal characters for tmux compatibility
