@@ -38,8 +38,8 @@
             }
         }
     },
-    "workspaceFolder": "/workspaces/user",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/user,type=bind,consistency=cached",
+    "workspaceFolder": "/workspaces/nethack-mcp",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/nethack-mcp,type=bind,consistency=cached",
     "remoteUser": "user",
     "mounts": [
         "source=config-nethack-mcp,target=/home/user/persistent-config,type=volume",

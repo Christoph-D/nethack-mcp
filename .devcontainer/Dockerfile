@@ -20,4 +20,4 @@ ENV OPENCODE_CONFIG=/home/$USERNAME/persistent-config/opencode.json
 RUN curl -fsSL https://opencode.ai/install | bash
 ENV PATH="/home/$USERNAME/.opencode/bin:$PATH"
 
-WORKDIR /workspaces/user
+WORKDIR /workspaces/nethack-mcp
