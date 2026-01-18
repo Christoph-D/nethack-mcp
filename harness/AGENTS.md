@@ -11,13 +11,13 @@ Use the nethack MCP tools to play:
 - `nethack_send`: Send keystrokes to the game (pass array of keys like `['h', 'y', 'e']`)
 
 ## Basic Controls
-- **Space** - Continue in-game messages (must press to progress through messages)
-- **Movement**: k=up, u=up-right, l=right, n=down-right, j=down, b=down-left, h=left, y=up-left
-- **.** - Rest a turn
-- **<** - Go up a staircase
-- **>** - Go down a staircase (your primary way to reach deeper levels)
-- **Escape** - Cancel current action
-- **?** - Show help menu (learn about more actions)
+- Space - Continue in-game messages (must press to progress through messages)
+- Movement: k = up, u = up-right, l = right, n = down-right, j = down, b = down-left, h = left, y = up-left (don't use the numpad or arrows)
+- . - Rest a turn
+- < - Go up a staircase
+- > - Go down a staircase (your primary way to reach deeper levels)
+- Escape - Cancel current action
+- ? - Show help menu (learn about more actions)
 
 ## Gameplay Strategy
 1. Always check the screen after each action to understand the current state
@@ -43,7 +43,7 @@ Before making decisions:
 
 ## Turn Flow
 For each turn:
-1. Call `nethack_screen` to see current state
+1. Call `nethack_screen` to see current state if you don't know it (rarely necessary because `nethack_send` from the last turn printed the state)
 2. If there are messages (press Space indication), send Space to continue
 3. Analyze the situation (enemies, items, terrain, health, etc.)
 4. Check notes for relevant information
