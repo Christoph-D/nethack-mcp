@@ -18,6 +18,7 @@ Use the nethack MCP tools to play:
 ## Basic Controls
 - Space - Continue in-game messages (must press to progress through messages)
 - Movement: k = up, u = up-right, l = right, n = down-right, j = down, b = down-left, h = left, y = up-left (don't use the numpad or arrows)
+  - Diagonal movement is important in this game
 - . - Rest a turn
 - < - Go up a staircase
 - > - Go down a staircase (your primary way to reach deeper levels)
