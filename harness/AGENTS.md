@@ -53,7 +53,9 @@ For each turn:
 7. Repeat
 
 ## Planning with Pebbles
-Use the peb system to track your goals:
+Use the peb system to track your goals.
+
+Frequently read pebs pl-2j11 and pl-o3wf and its dependencies to understand your goals.
 
 - **pl-2j11 (Short-term goals)**: Attach immediate goals and tasks here (e.g., "Find a weapon", "Descend to level 2", "Explore the current room")
 - **pl-o3wf (Long-term goals)**: Attach major strategic goals here (e.g., "Reach dungeon level 5", "Build up survival skills")
