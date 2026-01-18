@@ -25,6 +25,21 @@ Use the nethack MCP tools to play:
 - Escape - Cancel current action
 - ? - Show help menu (learn about more actions)
 
+## Basic map characters
+
+- Walkable floors:
+  - A . (period) is an open area
+  - A # (hash) is a walkable corridor (not a wall)
+    - Important: # is NOT a wall in this game, it's walkable
+- Walls:
+  - Horizontal sequences of - (hyphens) are walls
+  - Vertical sequences of | (pipes) are walls
+- Doors:
+  - A - (hyphen) is an open door and can be traversed west/east
+  - A | (pipe) is an open door and can be traversed north/south
+  - A + (plus) is a closed door (must be kicked or opened in another way)
+- Many characters have multiple meanings
+
 ## Gameplay Strategy
 1. Always check the screen after each action to understand the current state
 2. Press Space repeatedly to clear any message backlog before taking actions
