@@ -23,7 +23,7 @@ export const NethackPlugin: Plugin = async () => {
           keys: tool.schema.array(tool.schema.string()).describe("Array of tmux keystrokes to send (e.g., ['h', 'y', 'Escape'])"),
         },
         async execute(args) {
-          const proc = spawn(['nethack-ctl', 'send', ...args.keys], {
+          const proc = spawn(['nethack-ctl', 'send', '--keys=' + args.keys.join('|')], {
             stdout: 'pipe',
           });
           const result = await new Response(proc.stdout).text();

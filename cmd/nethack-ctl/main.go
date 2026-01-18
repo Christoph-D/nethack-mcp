@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Christoph-D/nethack-mcp/internal/tmux"
 	"github.com/urfave/cli/v2"
@@ -40,19 +41,27 @@ func main() {
 				},
 			},
 			{
-				Name:      "send",
-				Usage:     "Send keystrokes to NetHack",
-				ArgsUsage: "<keys...>",
+				Name:  "send",
+				Usage: "Send keystrokes to NetHack",
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:     "keys",
+						Usage:    "Pipe-separated keys to send (e.g., a|b|c)",
+						Required: true,
+					},
+				},
 				Action: func(c *cli.Context) error {
 					target, err := getTarget()
 					if err != nil {
 						return err
 					}
 
-					keys := c.Args().Slice()
-					if len(keys) == 0 {
+					keysStr := c.String("keys")
+					if keysStr == "" {
 						return fmt.Errorf("no keys to send")
 					}
+
+					keys := strings.Split(keysStr, "|")
 
 					return tmux.SendKeys(target, keys)
 				},

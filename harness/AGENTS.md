@@ -29,14 +29,15 @@ Use the nethack MCP tools to play:
 ## Learning from Experience
 **Critical**: Save what you learn during your adventure to `notes/` directory:
 - Create `.md` files for important discoveries
+- Organize the notes by category
 - Note dangerous monsters and how to deal with them
 - Record useful items and their effects
 - Document strategies that work (and those that don't)
 - Track patterns in dungeon generation
 
 ## Decision Making
-Before making decisions:
-1. Check your existing notes in `notes/`
+Frequently:
+1. Proactively check your existing notes in `notes/`
 2. Consider if you've encountered this situation before
 3. Review what worked or didn't work in similar situations
 4. If you die, create a "post-mortem" note explaining what went wrong
@@ -63,4 +64,4 @@ Use the peb system to track your goals:
 - Keep pl-2j11 and pl-o3wf open at all times; never mark them as `fixed`
 - Use peb status updates to track your progress (new → in-progress → fixed)
 
-Remember: The game is about careful exploration and learning from mistakes. Take your time, read the screen carefully, and document your discoveries.
+Remember: The game is about careful exploration and learning from mistakes. Take your time, read the screen carefully, and document your discoveries. Start with the basics such as figuring out the movement and document what you learn.
