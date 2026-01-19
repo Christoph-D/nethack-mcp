@@ -1,0 +1,3 @@
+[submodule "nethack-llm"]
+	path = nethack-llm
+	url = https://github.com/Christoph-D/NetHack
