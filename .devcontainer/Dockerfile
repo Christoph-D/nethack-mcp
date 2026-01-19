@@ -1,6 +1,8 @@
 FROM alpine:3.23
 
-RUN apk add --no-cache bash curl gcompat git go less ripgrep tzdata make nethack tmux
+RUN apk add --no-cache bash curl gcompat git go less ripgrep tzdata make nethack tmux \
+  gcc ncurses-dev bison flex gzip wget
+ 
 RUN ln -sf /usr/share/zoneinfo/hostlocaltime /etc/localtime
 
 ARG USERNAME=user
