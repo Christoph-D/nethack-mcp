@@ -2,9 +2,9 @@
 id: nh-x6ym
 title: Create src/mapdump.c with JSON dumping logic
 type: task
-status: new
+status: fixed
 created: "2026-01-20T10:26:01+01:00"
-changed: "2026-01-20T10:31:13+01:00"
+changed: "2026-01-20T10:44:54+01:00"
 ---
 Create src/mapdump.c implementing JSON map dumping functionality.
 

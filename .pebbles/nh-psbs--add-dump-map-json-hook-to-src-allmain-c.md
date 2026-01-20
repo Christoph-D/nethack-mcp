@@ -2,9 +2,9 @@
 id: nh-psbs
 title: Add dump_map_json hook to src/allmain.c
 type: task
-status: new
+status: fixed
 created: "2026-01-20T10:26:01+01:00"
-changed: "2026-01-20T10:33:18+01:00"
+changed: "2026-01-20T10:46:43+01:00"
 ---
 Add hook call to src/allmain.c to trigger JSON map dump after each turn completes.
 

@@ -2,9 +2,9 @@
 id: nh-nwzi
 title: Implement JSON map dump feature for NetHack
 type: epic
-status: new
+status: fixed
 created: "2026-01-20T10:25:32+01:00"
-changed: "2026-01-20T10:31:13+01:00"
+changed: "2026-01-20T10:56:29+01:00"
 blocked-by:
     - nh-x6ym
     - nh-29n0

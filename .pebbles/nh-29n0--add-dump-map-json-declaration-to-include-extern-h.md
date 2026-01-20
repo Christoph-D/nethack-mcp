@@ -2,9 +2,9 @@
 id: nh-29n0
 title: Add dump_map_json declaration to include/extern.h
 type: task
-status: new
+status: fixed
 created: "2026-01-20T10:26:01+01:00"
-changed: "2026-01-20T10:33:18+01:00"
+changed: "2026-01-20T10:46:08+01:00"
 ---
 Add dump_map_json function declaration to include/extern.h to make it accessible to all NetHack source files.
 
