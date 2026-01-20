@@ -6,7 +6,7 @@ RUN apk add --no-cache bash curl gcompat git go less ripgrep tzdata make nethack
 RUN ln -sf /usr/share/zoneinfo/hostlocaltime /etc/localtime
 
 ARG USERNAME=user
-RUN addgroup --gid 1000 $USERNAME && adduser --uid 1000 --ingroup $USERNAME --disabled-password $USERNAME
+RUN addgroup --gid 1000 $USERNAME && adduser --uid 1000 --ingroup $USERNAME --disabled-password $USERNAME && adduser $USERNAME games
 RUN mkdir -p /home/$USER && chown $USERNAME:$USERNAME /home/$USERNAME
 
 USER $USERNAME
