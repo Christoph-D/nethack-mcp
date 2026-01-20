@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
@@ -16,17 +15,6 @@ func getTarget() (string, error) {
 		return "", fmt.Errorf("NETHACK_TMUX_SESSION environment variable not set")
 	}
 	return target, nil
-}
-
-func formatOutput(output *tmux.Output) (string, error) {
-	data, err := json.MarshalIndent(output, "", "  ")
-	if err != nil {
-		return "", fmt.Errorf("failed to marshal output: %w", err)
-	}
-	var result strings.Builder
-	fmt.Fprintf(&result, "%s\nParsed data:\n", output.RawScreen)
-	result.WriteString(string(data))
-	return result.String(), nil
 }
 
 func main() {
@@ -48,12 +36,7 @@ func main() {
 						return err
 					}
 
-					formatted, err := formatOutput(output)
-					if err != nil {
-						return err
-					}
-
-					fmt.Print(formatted)
+					fmt.Print(output)
 					return nil
 				},
 			},
@@ -85,12 +68,7 @@ func main() {
 						return err
 					}
 
-					formatted, err := formatOutput(output)
-					if err != nil {
-						return err
-					}
-
-					fmt.Print(formatted)
+					fmt.Print(output)
 					return nil
 				},
 			},
