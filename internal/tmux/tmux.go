@@ -36,8 +36,8 @@ func CapturePane(target string) (string, error) {
 }
 
 func SendKeys(target string, keys []string) (string, error) {
-	if len(keys) > 1 {
-		return "", fmt.Errorf("Please send one key at a time")
+	if len(keys) > 5 {
+		return "", fmt.Errorf("Please send at most 5 keys at a time")
 	}
 
 	args := []string{"send-keys", "-t", target}
