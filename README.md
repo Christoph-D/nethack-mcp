@@ -4,7 +4,7 @@ A plugin for opencode to play nethack.
 
 ## Build
 
-To build the project, use the provided Makefile:
+Build the project:
 
 ```bash
 make install
@@ -32,36 +32,60 @@ make
 
 ## How to Run
 
-Follow these steps to start the system and the agent:
+Run these scripts in separate terminals:
 
-1. **Start NetHack**: Run the helper script to launch NetHack in a tmux session.
+1. **Terminal 1 - Start NetHack**:
 
    ```bash
    ./run.sh
    ```
 
-   This creates a tmux session named `nethack`.
+   This launches NetHack in a tmux session named `nethack`.
 
-2. **Navigate to Harness**:
-
-   ```bash
-   cd harness
-   ```
-
-3. **Start the Agent Environment**: Run `opencode` with the environment variable
-   pointing to the tmux session.
+2. **Terminal 2 - Start the Agent**:
 
    ```bash
-   NETHACK_TMUX_SESSION=nethack opencode
+   ./harness/opencode-nethack.sh
    ```
 
-4. **Play**: Once inside the `opencode` session, you can instruct the agent:
+   This sets up the required environment variables and launches the opencode agent.
+
+3. Once inside the `opencode` session, instruct the agent:
    > Play nethack
+
+## Running Multiple Agents in Parallel
+
+To run multiple NetHack-playing agents simultaneously, use different session names by setting the `NETHACK_TMUX_SESSION` environment variable:
+
+**Agent 1 (default):**
+```bash
+# Terminal 1
+./run.sh
+
+# Terminal 2
+./harness/opencode-nethack.sh
+```
+
+**Agent 2:**
+```bash
+# Terminal 3
+NETHACK_TMUX_SESSION=nethack2 ./run.sh
+
+# Terminal 4
+cp -r harness harness-copy
+NETHACK_TMUX_SESSION=nethack2 ./harness-copy/opencode-nethack.sh
+```
 
 ## Project Structure
 
-- `bin/`: Compiled binaries.
-- `cmd/`: Entry points for Go applications.
-- `harness/`: working directory for the agent execution.
-- `internal/`: Internal Go packages and logic.
-- `sh/`: Shell scripts for running NetHack.
+- `bin/`: Compiled binaries
+- `cmd/`: Entry points of `nethack-ctl`, the CLI backend of the MCP tools
+- `internal/`: Implementation of `nethack-ctl`
+- `harness/`: Agent execution workspace
+  - `opencode-nethack.sh`: Launch opencode agent with NetHack MCP tools
+  - `.opencode/plugin/nethack-ctl.ts`: opencode plugin that wraps `nethack-ctl` CLI in MCP tools
+- `nethack-llm/`: NetHack game fork (git submodule)
+- `docs/`: Documentation files
+- `AGENTS.md`: Development guide for agents
+- `run.sh`: Launch NetHack in tmux
+- `Makefile`: Build system configuration
