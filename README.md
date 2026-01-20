@@ -19,6 +19,17 @@ Other useful make targets:
 - `make deps`: Download dependencies
 - `make help`: Show all targets
 
+## Build NetHack
+
+Before running the system, build NetHack:
+
+```bash
+cd nethack-llm/sys/unix
+sh setup.sh hints/linux
+cd ../../
+make
+```
+
 ## How to Run
 
 Follow these steps to start the system and the agent:
