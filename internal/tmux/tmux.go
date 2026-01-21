@@ -9,6 +9,14 @@ import (
 	"time"
 )
 
+func GetTarget() string {
+	target := os.Getenv("NETHACK_TMUX_SESSION")
+	if target == "" {
+		return "nethack"
+	}
+	return target
+}
+
 func CapturePane(target string) (string, error) {
 	args := []string{"capture-pane", "-p", "-t", target}
 	cmd := exec.Command("tmux", args...)
@@ -27,10 +35,13 @@ func CapturePane(target string) (string, error) {
 
 	output := stdout.String()
 
-	if dumpFile := os.Getenv("NETHACK_DUMP_FILENAME"); dumpFile != "" {
-		if content, err := os.ReadFile(dumpFile); err == nil {
-			output += "\n" + string(content)
-		}
+	dumpFile := os.Getenv("NETHACK_DUMP_FILENAME")
+	if dumpFile == "" {
+		dumpFile = "/tmp/" + GetTarget() + "-map.json"
+	}
+
+	if content, err := os.ReadFile(dumpFile); err == nil {
+		output += "\n" + string(content)
 	}
 
 	return output, nil

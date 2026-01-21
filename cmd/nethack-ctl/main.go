@@ -9,14 +9,6 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func getTarget() (string, error) {
-	target := os.Getenv("NETHACK_TMUX_SESSION")
-	if target == "" {
-		return "", fmt.Errorf("NETHACK_TMUX_SESSION environment variable not set")
-	}
-	return target, nil
-}
-
 func main() {
 	app := &cli.App{
 		Name:  "nethack-ctl",
@@ -26,10 +18,7 @@ func main() {
 				Name:  "screen",
 				Usage: "Capture and display the current NetHack screen",
 				Action: func(c *cli.Context) error {
-					target, err := getTarget()
-					if err != nil {
-						return err
-					}
+					target := tmux.GetTarget()
 
 					output, err := tmux.CapturePane(target)
 					if err != nil {
@@ -51,10 +40,7 @@ func main() {
 					},
 				},
 				Action: func(c *cli.Context) error {
-					target, err := getTarget()
-					if err != nil {
-						return err
-					}
+					target := tmux.GetTarget()
 
 					keysStr := c.String("keys")
 					if keysStr == "" {

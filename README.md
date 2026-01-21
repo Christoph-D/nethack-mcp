@@ -54,6 +54,12 @@ Run these scripts in separate terminals:
 3. Once inside the `opencode` session, instruct the agent:
    > Play nethack
 
+## Environment Variables
+
+- **`NETHACK_TMUX_SESSION`** (default: `nethack`): The tmux session name where NetHack is running. Used by `run.sh` to name the tmux session and by `nethack-ctl` and the harness to target the correct session.
+
+- **`NETHACK_DUMP_FILENAME`** (optional): Path to the JSON file where NetHack writes the annotated map after each turn. If unset, defaults to `/tmp/${NETHACK_TMUX_SESSION}-map.json`.
+
 ## Running Multiple Agents in Parallel
 
 To run multiple NetHack-playing agents simultaneously, use different session
