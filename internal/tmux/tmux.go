@@ -40,6 +40,22 @@ func SendKeys(target string, keys []string) (string, error) {
 		return "", fmt.Errorf("Please send at most 5 keys at a time")
 	}
 
+	for _, key := range keys {
+		isValid := false
+
+		if len(key) == 1 {
+			isValid = true
+		} else if strings.HasPrefix(key, "C-") && len(key) == 3 {
+			isValid = true
+		} else if key == "Enter" || key == "Space" || key == "Escape" {
+			isValid = true
+		}
+
+		if !isValid {
+			return "", fmt.Errorf("invalid key '%s': must be a single character, C-<char> (e.g. C-x), or Enter/Space/Escape", key)
+		}
+	}
+
 	args := []string{"send-keys", "-t", target}
 
 	// Translate literal characters for tmux compatibility
