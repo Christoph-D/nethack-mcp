@@ -47,7 +47,7 @@ func SendKeys(target string, keys []string) (string, error) {
 			isValid = true
 		} else if strings.HasPrefix(key, "C-") && len(key) == 3 {
 			isValid = true
-		} else if key == "Enter" || key == "Space" || key == "Escape" {
+		} else if strings.EqualFold(key, "Enter") || strings.EqualFold(key, "Space") || strings.EqualFold(key, "Escape") {
 			isValid = true
 		}
 
@@ -56,13 +56,18 @@ func SendKeys(target string, keys []string) (string, error) {
 		}
 	}
 
-	// Translate literal characters for tmux compatibility
+	// Normalize special keys to correct capitalization for tmux
 	for i, key := range keys {
 		if key == " " {
 			keys[i] = "Space"
-		}
-		if key == "\n" {
+		} else if key == "\n" {
 			keys[i] = "Enter"
+		} else if strings.EqualFold(key, "Space") {
+			keys[i] = "Space"
+		} else if strings.EqualFold(key, "Enter") {
+			keys[i] = "Enter"
+		} else if strings.EqualFold(key, "Escape") {
+			keys[i] = "Escape"
 		}
 	}
 
