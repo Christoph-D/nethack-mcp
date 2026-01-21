@@ -48,16 +48,19 @@ Run these scripts in separate terminals:
    ./harness/opencode-nethack.sh
    ```
 
-   This sets up the required environment variables and launches the opencode agent.
+   This sets up the required environment variables and launches the opencode
+   agent.
 
 3. Once inside the `opencode` session, instruct the agent:
    > Play nethack
 
 ## Running Multiple Agents in Parallel
 
-To run multiple NetHack-playing agents simultaneously, use different session names by setting the `NETHACK_TMUX_SESSION` environment variable:
+To run multiple NetHack-playing agents simultaneously, use different session
+names by setting the `NETHACK_TMUX_SESSION` environment variable:
 
 **Agent 1 (default):**
+
 ```bash
 # Terminal 1
 ./run.sh
@@ -67,6 +70,7 @@ To run multiple NetHack-playing agents simultaneously, use different session nam
 ```
 
 **Agent 2:**
+
 ```bash
 # Terminal 3
 NETHACK_TMUX_SESSION=nethack2 ./run.sh
@@ -76,6 +80,35 @@ cp -r harness harness-copy
 NETHACK_TMUX_SESSION=nethack2 ./harness-copy/opencode-nethack.sh
 ```
 
+## Architecture
+
+Components:
+
+- `nethack-ctl`: A Go CLI tool to capture NetHack output and send keys presses
+  to it.
+- Instrumented NetHack: Modified to output an annotated map in JSON format after
+  every turn.
+- Opencode MCP plugin: Wraps `nethack-cli` commands as MCP tools.
+- Opencode harness: AGENTS.md instructs the agent to play NetHack.
+
+Example map output:
+
+<!-- prettier-ignore -->
+```json
+{
+  "turn": 2,
+  "dungeon_level": 1,
+  "hero": "70,13",
+  "tiles": {
+    "walls": [[69,10], [70,10], [72,10], [73,10], [74,10], [75,10], [76,10], [69,11], [76,11], [69,12], [76,12], [69,13], [76,13], [69,14], [70,14], [71,14], [72,14], [73,14], [74,14], [75,14], [76,14]],
+    "open_spaces": [[71,10], [70,11], [71,11], [72,11], [73,11], [74,11], [75,11], [70,12], [72,12], [73,12], [74,12], [75,12], [70,13], [71,13], [72,13], [73,13], [74,13], [75,13]],
+    "special": [[[71,12],"stairs up"]]
+  },
+  "monsters": [[[70,11],"the kitten","peaceful"], [[73,13],"the grid bug","hostile"]],
+  "items": [[[73,11],"dwarf corpse"], [[73,11],"blue gem"], [[73,11],"10 darts"]]
+}
+```
+
 ## Project Structure
 
 - `bin/`: Compiled binaries
@@ -83,7 +116,8 @@ NETHACK_TMUX_SESSION=nethack2 ./harness-copy/opencode-nethack.sh
 - `internal/`: Implementation of `nethack-ctl`
 - `harness/`: Agent execution workspace
   - `opencode-nethack.sh`: Launch opencode agent with NetHack MCP tools
-  - `.opencode/plugin/nethack-ctl.ts`: opencode plugin that wraps `nethack-ctl` CLI in MCP tools
+  - `.opencode/plugin/nethack-ctl.ts`: opencode plugin that wraps `nethack-ctl`
+    CLI in MCP tools
 - `nethack-llm/`: NetHack game fork (git submodule)
 - `docs/`: Documentation files
 - `AGENTS.md`: Development guide for agents
