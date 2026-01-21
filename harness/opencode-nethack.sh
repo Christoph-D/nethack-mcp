@@ -4,7 +4,12 @@ set -e
 
 cd "$(dirname "$0")"
 
-PATH=$PATH:$(readlink -f ../go/bin)
+if [ ! -d ../bin ]; then
+  mkdir ../bin
+fi
+
+NETHACK_CTL=$(readlink -f ../bin)
+PATH=$PATH:$NETHACK_CTL
 
 if ! which nethack-ctl; then
   echo "Building nethack-ctl..."
