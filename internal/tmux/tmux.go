@@ -56,8 +56,6 @@ func SendKeys(target string, keys []string) (string, error) {
 		}
 	}
 
-	args := []string{"send-keys", "-t", target}
-
 	// Translate literal characters for tmux compatibility
 	for i, key := range keys {
 		if key == " " {
@@ -68,18 +66,19 @@ func SendKeys(target string, keys []string) (string, error) {
 		}
 	}
 
-	args = append(args, keys...)
+	for _, key := range keys {
+		cmd := exec.Command("tmux", "send-keys", "-t", target, key)
 
-	cmd := exec.Command("tmux", args...)
-
-	err := cmd.Run()
-	if err != nil {
-		if exitErr, ok := err.(*exec.ExitError); ok {
-			return "", fmt.Errorf("tmux send-keys failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+		err := cmd.Run()
+		if err != nil {
+			if exitErr, ok := err.(*exec.ExitError); ok {
+				return "", fmt.Errorf("tmux send-keys failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+			}
+			return "", fmt.Errorf("tmux send-keys failed: %w", err)
 		}
-		return "", fmt.Errorf("tmux send-keys failed: %w", err)
+
+		time.Sleep(200 * time.Millisecond)
 	}
 
-	time.Sleep(500 * time.Millisecond)
 	return CapturePane(target)
 }
