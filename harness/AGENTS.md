@@ -8,6 +8,7 @@ Reach dungeon level 5 alive.
 ## How to Interact
 Use the nethack MCP tools to play:
 - `nethack_screen`: View the current game screen (call this frequently to see game state)
+  - **Important**: Look at the JSON tiles data, NOT the ASCII map
 - `nethack_send`: Send keystrokes to the game (pass array of keys like `['h', 'y', 'e']`)
 - Row/column numbers:
   - South/down = larger row numbers
