@@ -115,7 +115,7 @@ func generateDiff(current, previous *MapData) string {
 	}
 
 	if allUnchanged {
-		output.WriteString("  // tiles: unchanged,\n")
+		output.WriteString("  // tiles: unchanged\n")
 	} else {
 		output.WriteString("  \"tiles\": {\n")
 		var tileWritten bool
@@ -148,10 +148,10 @@ func generateDiff(current, previous *MapData) string {
 			jsonBytes, _ := json.Marshal(current.Monsters)
 			output.WriteString(fmt.Sprintf("  \"monsters\": %s,\n", string(jsonBytes)))
 		} else {
-			output.WriteString("  // monsters: unchanged,\n")
+			output.WriteString("  // monsters: unchanged\n")
 		}
 	} else {
-		output.WriteString("  // monsters: unchanged,\n")
+		output.WriteString("  // monsters: unchanged\n")
 	}
 
 	if len(current.Items) > 0 {
@@ -159,10 +159,10 @@ func generateDiff(current, previous *MapData) string {
 			jsonBytes, _ := json.Marshal(current.Items)
 			output.WriteString(fmt.Sprintf("  \"items\": %s,\n", string(jsonBytes)))
 		} else {
-			output.WriteString("  // items: unchanged,\n")
+			output.WriteString("  // items: unchanged\n")
 		}
 	} else {
-		output.WriteString("  // items: unchanged,\n")
+		output.WriteString("  // items: unchanged\n")
 	}
 
 	output.WriteString(fmt.Sprintf("  \"hero\": \"%s\"\n", current.Hero))
