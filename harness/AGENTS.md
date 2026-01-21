@@ -26,6 +26,55 @@ Use the nethack MCP tools to play:
 - Escape - Cancel current action
 - ? - Show help menu (learn about more actions)
 
+## Game Commands Reference
+
+| Key | Command | Description |
+|-----|---------|-------------|
+| `C-D` | kick | Kick a door or something else |
+| `C-T` | Tport | Teleport (if you can) |
+| `C-X` | show | Show your attributes |
+| `a` | apply | Apply or use a tool (pick-axe, key, camera, etc.) |
+| `A` | takeoffall | Choose multiple items to take off (armor, accessories, weapons) |
+| `c` | close | Close a door |
+| `d` | drop | Drop an object (e.g., `d7a` drops seven items of object 'a') |
+| `D` | Drop | Drop selected types of objects |
+| `e` | eat | Eat something |
+| `E` | engrave | Write a message in the dust on the floor (use `E-` for fingers) |
+| `f` | fire | Fire ammunition from quiver |
+| `i` | invent | List your inventory |
+| `o` | open | Open a door |
+| `p` | pay | Pay your bill in a shop |
+| `P` | puton | Put on an accessory (ring, amulet, etc.) |
+| `q` | quaff | Drink something (potion, water, etc.) |
+| `Q` | quiver | Select ammunition for quiver |
+| `r` | read | Read a scroll or spellbook |
+| `R` | remove | Remove an accessory (ring, amulet, etc.) |
+| `s` | search | Search for secret doors, hidden traps, and monsters |
+| `t` | throw | Throw or shoot a weapon |
+| `T` | takeoff | Take off armor |
+| `w` | wield | Wield a weapon (use `w-` to unwield) |
+| `W` | wear | Wear armor |
+| `x` | xchange | Swap wielded and secondary weapons |
+| `X` | twoweapon | Toggle two-weapon combat (if role allows) |
+| `z` | zap | Zap a wand |
+| `Z` | Zap | Cast a spell |
+| `<` | up | Go up the stairs |
+| `>` | down | Go down the stairs |
+| `^` | trap_id | Identify a previously found trap |
+| `*` | show_all | Show all equipped items at once |
+| `$` | gold | Count your gold |
+| `+` | spells | List spells you know; rearrange if desired |
+| `_` | travel | Move via shortest-path to a map point |
+| `.` | rest | Wait a moment |
+| `,` | pickup | Pick up all you can carry |
+| `:` | look | Look at what is here |
+
+## How to travel
+
+1. Press `_`
+2. Use the movement keys to move the cursor to the desired location
+3. Press `.` to travel to that location via shortest-path
+
 ## Basic map characters
 
 - Walkable floors:
