@@ -19,7 +19,8 @@ func CapturePane(target string) (string, error) {
 	err := cmd.Run()
 	if err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok {
-			return "", fmt.Errorf("tmux capture-pane failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+			fmt.Println(string(exitErr.Stderr))
+			return "", fmt.Errorf("tmux capture-pane failed: %w", err)
 		}
 		return "", fmt.Errorf("tmux capture-pane failed: %w", err)
 	}
@@ -77,7 +78,8 @@ func SendKeys(target string, keys []string) (string, error) {
 		err := cmd.Run()
 		if err != nil {
 			if exitErr, ok := err.(*exec.ExitError); ok {
-				return "", fmt.Errorf("tmux send-keys failed: %s", strings.TrimSpace(string(exitErr.Stderr)))
+				fmt.Println(string(exitErr.Stderr))
+				return "", fmt.Errorf("tmux send-keys failed: %w", err)
 			}
 			return "", fmt.Errorf("tmux send-keys failed: %w", err)
 		}
