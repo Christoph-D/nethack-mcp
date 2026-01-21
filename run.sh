@@ -18,6 +18,7 @@ export NETHACK_DUMP_FILENAME
 
 tmux new-session -d -s "${NETHACK_TMUX_SESSION}" -n "${NETHACK_TMUX_SESSION}" bash -c '
 while true; do
+    rm -f "$NETHACK_DUMP_FILENAME"
     NETHACKOPTIONS="role:wiz,race:hum,align:neu,gender:mal,!autopickup" \
       ./nethack-llm/src/nethack -u robot || exit
     echo "NetHack exited. Restarting in 2 seconds..."
