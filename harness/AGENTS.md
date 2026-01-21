@@ -70,75 +70,37 @@ Use the nethack MCP tools to play:
 | `,` | pickup | Pick up all you can carry |
 | `:` | look | Look at what is here |
 
-## How to travel
+## How to fast travel
 
 1. Press `_`
 2. Use the movement keys to move the cursor to the desired location
 3. Press `.` to travel to that location via shortest-path
 
-## Basic map characters
-
-- Walkable floors:
-  - A . (period) is an open area
-  - A # (hash) is a walkable corridor (not a wall)
-    - Important: # is NOT a wall in this game, it's walkable
-- Walls:
-  - Horizontal sequences of - (hyphens) are walls
-  - Vertical sequences of | (pipes) are walls
-- Doors:
-  - A - (hyphen) is an open door and can be traversed west/east
-  - A | (pipe) is an open door and can be traversed north/south
-  - A + (plus) is a closed door (must be kicked or opened in another way)
-- Many characters have multiple meanings
-
 ## Gameplay Strategy
 1. Always check the screen after each action to understand the current state
-2. Press Space repeatedly to clear any message backlog before taking actions
-3. Look for staircases (marked with `<` or `>`) and use them to change levels
-4. Be cautious: NetHack is unforgiving and death is permanent
-5. Explore systematically, don't rush into unknown areas
-
-## Learning from Experience
-**Critical**: Save what you learn during your adventure to `notes/` directory:
-- Create `.md` files for important discoveries
-- Organize the notes by category
-- Note dangerous monsters and how to deal with them
-- Record useful items and their effects
-- Document strategies that work (and those that don't)
-- Track patterns in dungeon generation
-
-## Decision Making
-Frequently:
-1. Proactively check your existing notes in `notes/`
-2. Consider if you've encountered this situation before
-3. Review what worked or didn't work in similar situations
-4. If you die, create a "post-mortem" note explaining what went wrong
+2. Look for staircases and use them to change levels
+3. Be cautious: NetHack is unforgiving and death is permanent
+4. Explore systematically, don't rush into unknown areas
 
 ## Turn Flow
 For each turn:
 1. Call `nethack_screen` to see current state if you don't know it (rarely necessary because `nethack_send` from the last turn printed the state)
-2. If there are messages (press Space indication), send Space to continue
+2. To close a message or menu like the inventory screen, send a single Space
 3. Analyze the situation (enemies, items, terrain, health, etc.)
-4. Check notes for relevant information
-5. Decide on action
-6. Call `nethack_send` with your keystrokes
-7. Repeat
+4. Check notes.md for relevant information
+5. Update notes.md if needed
+6. Decide on action
+7. Call `nethack_send` with your keystrokes
+8. Repeat
 
-## Planning with Pebbles
-Use the peb system to track your goals.
+## Planning
 
-Frequently read pebs pl-2j11 and pl-o3wf and its dependencies to understand your goals.
+Use notes.md to track your goals. Do not create other files for note taking. Use only notes.md. You must track:
 
-- **pl-2j11 (Short-term goals)**: Attach immediate goals and tasks here (e.g., "Find a weapon", "Descend to level 2", "Explore the current room")
-- **pl-o3wf (Long-term goals)**: Attach major strategic goals here (e.g., "Reach dungeon level 5", "Build up survival skills")
+- Short-term goals, e.g., "Defeat the goblin", "Walk to the stairs", "Explore the current room"
+- Long-term goals, e.g., "Reach dungeon level 5", "Get poison immunity"
 
-Whenever a run ends, close all short-term goal as wontfix and consider which long-term goals to keep and which to close.
-
-**Critical**:
-- Always create new task pebs for your short-term goals and attach them to pl-2j11 via `blocked-by`
-- When planning, think about what long-term goals your short-term tasks contribute to and attach them to pl-o3wf
-- Keep pl-2j11 and pl-o3wf open at all times; never mark them as `fixed`
-- Use peb status updates to track your progress (new → in-progress → fixed)
+Whenever a run ends, remove all short-term  goals and think about long-term goals that maximize your chance of survival in the next run. If you die, add a "post-mortem" note explaining what went wrong and what you'll do differently next time.
 
 ## Tool Creation
 
