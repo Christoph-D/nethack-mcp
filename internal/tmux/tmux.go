@@ -91,8 +91,6 @@ func generateDiff(current, previous *MapData) string {
 		output.WriteString(fmt.Sprintf("  \"cursor\": \"%s\",\n", *current.Cursor))
 	}
 
-	output.WriteString("  \"tiles\": {\n")
-
 	tileChanges := compareTiles(current.Tiles, previous.Tiles)
 	tilesFields := []struct {
 		name  string
@@ -108,30 +106,41 @@ func generateDiff(current, previous *MapData) string {
 		{"unexplored_tiles", current.Tiles.UnexploredTiles, len(current.Tiles.UnexploredTiles) == 0},
 	}
 
-	var tileWritten bool
+	allUnchanged := true
 	for _, field := range tilesFields {
-		if field.omit {
-			continue
+		if !field.omit && tileChanges[field.name] {
+			allUnchanged = false
+			break
 		}
-
-		if tileWritten {
-			output.WriteString(",\n")
-		}
-		tileWritten = true
-
-		if !tileChanges[field.name] {
-			output.WriteString(fmt.Sprintf("    // %s: unchanged", field.name))
-			continue
-		}
-
-		jsonBytes, _ := json.Marshal(field.value)
-		output.WriteString(fmt.Sprintf("    \"%s\": %s", field.name, string(jsonBytes)))
 	}
 
-	if tileWritten {
-		output.WriteString("\n  },\n")
+	if allUnchanged {
+		output.WriteString("  // tiles: unchanged,\n")
 	} else {
-		output.WriteString("\n  },\n")
+		output.WriteString("  \"tiles\": {\n")
+		var tileWritten bool
+		for _, field := range tilesFields {
+			if field.omit {
+				continue
+			}
+
+			if tileWritten {
+				output.WriteString(",\n")
+			}
+			tileWritten = true
+
+			if !tileChanges[field.name] {
+				output.WriteString(fmt.Sprintf("    // %s: unchanged", field.name))
+				continue
+			}
+
+			jsonBytes, _ := json.Marshal(field.value)
+			output.WriteString(fmt.Sprintf("    \"%s\": %s", field.name, string(jsonBytes)))
+		}
+		if tileWritten {
+			output.WriteString("\n")
+		}
+		output.WriteString("  },\n")
 	}
 
 	if len(current.Monsters) > 0 {
