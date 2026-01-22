@@ -23,7 +23,7 @@ Use the nethack MCP tools to play:
 - . - Rest a turn
 - < - Go up a staircase
 - > - Go down a staircase (your primary way to reach deeper levels)
-- #kick - Kick a door (Send ["#", "k", "i", "c", "k", "Enter", direction_key])
+- C-d - Kick a door or chest or something else (Send ["C-d", direction_key])
 - Escape - Cancel current action
 - ? - Show help menu (learn about more actions)
 
@@ -31,9 +31,9 @@ Use the nethack MCP tools to play:
 
 | Key | Command | Description |
 |-----|---------|-------------|
-| `C-D` | kick | Kick a door or something else |
-| `C-T` | Tport | Teleport (if you can) |
-| `C-X` | show | Show your attributes |
+| `C-d` | kick | Kick a door or something else |
+| `C-t` | Tport | Teleport (if you can) |
+| `C-x` | show | Show your attributes |
 | `a` | apply | Apply or use a tool (pick-axe, key, camera, etc.) |
 | `A` | takeoffall | Choose multiple items to take off (armor, accessories, weapons) |
 | `c` | close | Close a door |
