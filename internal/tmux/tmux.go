@@ -75,12 +75,22 @@ func compareTiles(a, b Tiles) map[string]bool {
 	return changed
 }
 
-func generateDiff(current, previous *MapData) string {
-	if previous == nil {
-		b, _ := json.Marshal(current)
-		return string(b)
+func writeArrayField(output *strings.Builder, name string, current, previous []interface{}, hasPrevious bool) {
+	if len(current) > 0 {
+		if !hasPrevious || !reflect.DeepEqual(current, previous) {
+			jsonBytes, _ := json.Marshal(current)
+			output.WriteString(fmt.Sprintf("  \"%s\": %s,\n", name, string(jsonBytes)))
+		} else {
+			output.WriteString(fmt.Sprintf("  // %s: unchanged\n", name))
+		}
+	} else {
+		if hasPrevious {
+			output.WriteString(fmt.Sprintf("  // %s: unchanged\n", name))
+		}
 	}
+}
 
+func generateDiff(current, previous *MapData) string {
 	var output strings.Builder
 	output.WriteString("{\n")
 
@@ -91,7 +101,12 @@ func generateDiff(current, previous *MapData) string {
 		output.WriteString(fmt.Sprintf("  \"cursor\": \"%s\",\n", *current.Cursor))
 	}
 
-	tileChanges := compareTiles(current.Tiles, previous.Tiles)
+	tileChanges := make(map[string]bool)
+	hasPrevious := previous != nil
+	if hasPrevious {
+		tileChanges = compareTiles(current.Tiles, previous.Tiles)
+	}
+
 	tilesFields := []struct {
 		name  string
 		value interface{}
@@ -106,7 +121,7 @@ func generateDiff(current, previous *MapData) string {
 		{"unexplored_tiles", current.Tiles.UnexploredTiles, len(current.Tiles.UnexploredTiles) == 0},
 	}
 
-	allUnchanged := true
+	allUnchanged := hasPrevious
 	for _, field := range tilesFields {
 		if !field.omit && tileChanges[field.name] {
 			allUnchanged = false
@@ -129,7 +144,7 @@ func generateDiff(current, previous *MapData) string {
 			}
 			tileWritten = true
 
-			if !tileChanges[field.name] {
+			if !tileChanges[field.name] && hasPrevious {
 				output.WriteString(fmt.Sprintf("    // %s: unchanged", field.name))
 				continue
 			}
@@ -143,27 +158,17 @@ func generateDiff(current, previous *MapData) string {
 		output.WriteString("  },\n")
 	}
 
-	if len(current.Monsters) > 0 {
-		if !reflect.DeepEqual(current.Monsters, previous.Monsters) {
-			jsonBytes, _ := json.Marshal(current.Monsters)
-			output.WriteString(fmt.Sprintf("  \"monsters\": %s,\n", string(jsonBytes)))
-		} else {
-			output.WriteString("  // monsters: unchanged\n")
-		}
-	} else {
-		output.WriteString("  // monsters: unchanged\n")
+	var previousMonsters []interface{}
+	if hasPrevious {
+		previousMonsters = previous.Monsters
 	}
+	writeArrayField(&output, "monsters", current.Monsters, previousMonsters, hasPrevious)
 
-	if len(current.Items) > 0 {
-		if !reflect.DeepEqual(current.Items, previous.Items) {
-			jsonBytes, _ := json.Marshal(current.Items)
-			output.WriteString(fmt.Sprintf("  \"items\": %s,\n", string(jsonBytes)))
-		} else {
-			output.WriteString("  // items: unchanged\n")
-		}
-	} else {
-		output.WriteString("  // items: unchanged\n")
+	var previousItems []interface{}
+	if hasPrevious {
+		previousItems = previous.Items
 	}
+	writeArrayField(&output, "items", current.Items, previousItems, hasPrevious)
 
 	output.WriteString(fmt.Sprintf("  \"hero\": \"%s\"\n", current.Hero))
 	output.WriteString("}")
