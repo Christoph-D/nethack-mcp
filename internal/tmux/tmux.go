@@ -179,7 +179,7 @@ func GetTarget() string {
 	return target
 }
 
-func CapturePane(target string) (string, error) {
+func CapturePane(target string, showDiff bool) (string, error) {
 	args := []string{"capture-pane", "-p", "-t", target}
 	cmd := exec.Command("tmux", args...)
 
@@ -212,12 +212,14 @@ func CapturePane(target string) (string, error) {
 		return output, nil
 	}
 
-	previousFile := dumpFile + ".previous"
 	var previous *MapData
-	if prevContent, err := os.ReadFile(previousFile); err == nil {
-		var prev MapData
-		if err := json.Unmarshal(prevContent, &prev); err == nil {
-			previous = &prev
+	if showDiff {
+		previousFile := dumpFile + ".previous"
+		if prevContent, err := os.ReadFile(previousFile); err == nil {
+			var prev MapData
+			if err := json.Unmarshal(prevContent, &prev); err == nil {
+				previous = &prev
+			}
 		}
 	}
 
@@ -285,5 +287,5 @@ func SendKeys(target string, keys []string) (string, error) {
 		time.Sleep(200 * time.Millisecond)
 	}
 
-	return CapturePane(target)
+	return CapturePane(target, true)
 }

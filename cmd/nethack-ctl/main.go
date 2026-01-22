@@ -20,7 +20,7 @@ func main() {
 				Action: func(c *cli.Context) error {
 					target := tmux.GetTarget()
 
-					output, err := tmux.CapturePane(target)
+					output, err := tmux.CapturePane(target, false)
 					if err != nil {
 						return err
 					}
