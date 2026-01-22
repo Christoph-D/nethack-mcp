@@ -118,7 +118,7 @@ func generateDiff(current, previous *MapData) string {
 		{"air", current.Tiles.Air, len(current.Tiles.Air) == 0},
 		{"cloud", current.Tiles.Cloud, len(current.Tiles.Cloud) == 0},
 		{"special", current.Tiles.Special, len(current.Tiles.Special) == 0},
-		{"unexplored_tiles", current.Tiles.UnexploredTiles, len(current.Tiles.UnexploredTiles) == 0},
+		{"unexplored_tiles", current.Tiles.UnexploredTiles, false},
 	}
 
 	allUnchanged := hasPrevious
@@ -144,7 +144,7 @@ func generateDiff(current, previous *MapData) string {
 			}
 			tileWritten = true
 
-			if !tileChanges[field.name] && hasPrevious {
+			if !tileChanges[field.name] && hasPrevious && field.name != "unexplored_tiles" {
 				output.WriteString(fmt.Sprintf("    // %s: unchanged", field.name))
 				continue
 			}
