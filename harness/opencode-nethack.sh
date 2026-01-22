@@ -28,4 +28,4 @@ NETHACK_DUMP_FILENAME=/tmp/${NETHACK_TMUX_SESSION}-map.json
 export NETHACK_TMUX_SESSION
 export NETHACK_DUMP_FILENAME
 
-opencode
+opencode --agent nethack-player
