@@ -1,25 +1,24 @@
 ---
 description: >-
   Use this agent when you need to move a NetHack character toward specific
-  coordinates or a general area. This agent should be called whenever the user
-  provides a destination (like 'move to (15, 10)', 'go to the altar', or 'head
-  toward the stairs') and needs safe, focused navigation without distractions.
+  coordinates or a general area. This agent should be called whenever you have a destination (like 'move to (15, 10)', 'go to the altar', or 'head
+  toward the stairs') and need safe, focused navigation without distractions.
 
 
   Examples:
 
   <example>
 
-  Context: User wants to move their NetHack character to a specific location.
+  Context: Assistant wants to move their NetHack character to a specific location.
 
-  user: "I need to get to the stairs at coordinates (12, 8)"
+  assistant: "I need to get to the stairs at coordinates (12, 8)"
 
   assistant: "I'll use the nethack-pathfinder agent to navigate you safely to
   those coordinates."
 
   <commentary>
 
-  The user has specified a destination with coordinates. Use the
+  The assistant has specified a destination with coordinates. Use the
   nethack-pathfinder agent to execute this navigation task.
 
   </commentary>
@@ -29,17 +28,32 @@ description: >-
 
   <example>
 
-  Context: User identifies a target area in NetHack that they want to reach.
+  Context: Assistant identifies a target area in NetHack that they want to reach.
 
-  user: "There's an altar in the northeast corner. Take me there."
+  assistant: "There's an item in the northeast corner that I need to pick up."
 
   assistant: "Let me launch the nethack-pathfinder agent to move you toward the
-  altar in the northeast."
+  item in the northeast."
 
   <commentary>
 
-  The user has provided a general area destination. Use the nethack-pathfinder
+  Assistant specified a general area destination. Use the nethack-pathfinder
   agent to navigate toward the specified area.
+
+  </commentary>
+
+  </example>
+
+
+  <example>
+
+  Context: Assistant realizes their NetHack hero is stuck in a location and can't find a path out.
+
+  assistant: "I'll use the nethack-pathfinder agent to find an escape route from this location."
+
+  <commentary>
+
+  The assistant has identified that their character is stuck and needs navigation help. Use the nethack-pathfinder agent to guide them to a more desirable area.
 
   </commentary>
 
