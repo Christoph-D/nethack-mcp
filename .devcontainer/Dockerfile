@@ -1,7 +1,7 @@
 FROM alpine:3.23
 
 RUN apk add --no-cache bash curl gcompat git go less ripgrep tzdata make nethack tmux \
-  gcc ncurses-dev bison flex gzip wget coreutils linux-headers
+  gcc ncurses-dev bison flex gzip wget coreutils linux-headers openssh-client-default
 
 RUN ln -sf /usr/share/zoneinfo/hostlocaltime /etc/localtime
 
@@ -23,4 +23,5 @@ ENV OPENCODE_CONFIG=/home/$USERNAME/persistent-config/opencode.json
 RUN curl -fsSL https://opencode.ai/install | bash
 ENV PATH="/home/$USERNAME/.opencode/bin:$PATH"
 
+ENV EDITOR='code --wait'
 WORKDIR /workspaces/nethack-mcp
