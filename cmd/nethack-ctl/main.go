@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Christoph-D/nethack-mcp/internal/tmux"
 	"github.com/urfave/cli/v2"
+	"go.yozora.eu/nethack-mcp/internal/tmux"
 )
 
 func main() {

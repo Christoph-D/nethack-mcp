@@ -1,4 +1,4 @@
-module github.com/Christoph-D/nethack-mcp
+module go.yozora.eu/nethack-mcp
 
 go 1.25.6
 
